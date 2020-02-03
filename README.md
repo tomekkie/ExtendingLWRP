@@ -1,7 +1,7 @@
 
 Tested in Unity 2019.2.6f1and LWRP 6.9.1.
 
-# Extending LWRP
+# Extending URP
 Examples for extending the LWRP
 
 Find other examples here: https://github.com/Unity-Technologies/LWRP-CustomRendererExamples
