@@ -1,5 +1,5 @@
 
-Tested in Unity 2019.2.6f1and LWRP 6.9.1.
+Tested in Unity 2019.3.0f6and URP 7.1.8.
 
 # Extending URP
 Examples for extending the LWRP
