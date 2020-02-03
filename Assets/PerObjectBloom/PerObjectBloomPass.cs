@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.LWRP;
+using UnityEngine.Rendering.Universal;
+
 
 
 // This class sets up the bloom pass
@@ -29,7 +30,7 @@ public class PerObjectBloomPassImpl : ScriptableRenderPass
     private const string k_PerObjectBloomTag = "Per Object Bloom";
 
     static readonly string kStencilWriteShaderName = "Hidden/Internal-StencilWrite";
-    static readonly ShaderTagId kLightweightForwardShaderId = new ShaderTagId("LightweightForward");
+    static readonly ShaderTagId kUniversalForwardShaderId = new ShaderTagId("UniversalForward");
 
     RenderTargetHandle m_PerObjectRenderTextureHandle;
     FilteringSettings m_PerObjectFilterSettings;
@@ -69,7 +70,7 @@ public class PerObjectBloomPassImpl : ScriptableRenderPass
             var sortFlags = renderingData.cameraData.defaultOpaqueSortFlags;
 
             // Setup render data from camera
-            var drawSettings = CreateDrawingSettings(kLightweightForwardShaderId, ref renderingData, sortFlags);
+            var drawSettings = CreateDrawingSettings(kUniversalForwardShaderId, ref renderingData, sortFlags);
             drawSettings.overrideMaterial = m_BrightnessMaskMaterial;
             context.DrawRenderers(renderingData.cullResults, ref drawSettings, ref m_PerObjectFilterSettings);
 

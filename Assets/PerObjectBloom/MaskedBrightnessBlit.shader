@@ -20,7 +20,7 @@ Shader "Hidden/MaskedBrightnessBlit"
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Core.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
 			struct Attributes
 			{
