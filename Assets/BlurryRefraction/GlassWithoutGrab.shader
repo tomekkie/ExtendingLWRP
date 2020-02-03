@@ -11,12 +11,12 @@
 	SubShader
 	{
 		// We must be transparent, so other objects are drawn before this one.
-		Tags { "Queue" = "Transparent" "RenderPipeline" = "LightweightPipeline" "RenderType" = "Opaque" }
+		Tags { "Queue" = "Transparent" "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }
 
 		Pass
 		{
 			Name "Simple"
-			Tags { "LightMode" = "LightweightForward" }
+			Tags { "LightMode" = "UniversalForward" }
 
 			HLSLPROGRAM
 			// Required to compile gles 2.0 with standard srp library
@@ -26,7 +26,7 @@
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Core.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Macros.hlsl"
 
 			struct Attributes

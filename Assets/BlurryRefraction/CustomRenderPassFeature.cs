@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.LWRP;
 
-public class CustomRenderPassFeature : ScriptableRendererFeature
+
+public class CustomRenderPassFeature : UnityEngine.Rendering.Universal.ScriptableRendererFeature
 {
-    class CustomRenderPass : ScriptableRenderPass
+    class CustomRenderPass : UnityEngine.Rendering.Universal.ScriptableRenderPass
     {
         // This method is called before executing the render pass. 
         // It can be used to configure render targets and their clear state. Also to create temporary render target textures.
@@ -19,7 +19,7 @@ public class CustomRenderPassFeature : ScriptableRendererFeature
         // Use <c>ScriptableRenderContext</c> to issue drawing commands or execute command buffers
         // https://docs.unity3d.com/ScriptReference/Rendering.ScriptableRenderContext.html
         // You don't have to call ScriptableRenderContext.submit, the render pipeline will call it at specific points in the pipeline.
-        public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+        public override void Execute(ScriptableRenderContext context, ref UnityEngine.Rendering.Universal.RenderingData renderingData)
         {
         }
 
@@ -36,12 +36,12 @@ public class CustomRenderPassFeature : ScriptableRendererFeature
         m_ScriptablePass = new CustomRenderPass();
 
         // Configures where the render pass should be injected.
-        m_ScriptablePass.renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
+        m_ScriptablePass.renderPassEvent = UnityEngine.Rendering.Universal.RenderPassEvent.AfterRenderingOpaques;
     }
     
     // Here you can inject one or multiple render passes in the renderer.
     // This method is called when setting up the renderer once per-camera.
-    public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
+    public override void AddRenderPasses(UnityEngine.Rendering.Universal.ScriptableRenderer renderer, ref UnityEngine.Rendering.Universal.RenderingData renderingData)
     {
         renderer.EnqueuePass(m_ScriptablePass);
     }

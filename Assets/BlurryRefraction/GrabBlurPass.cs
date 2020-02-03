@@ -1,14 +1,14 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.LWRP;
 
 
-public class GrabBlurPass : ScriptableRendererFeature
+
+public class GrabBlurPass : UnityEngine.Rendering.Universal.ScriptableRendererFeature
 {
     private GrabBlurPassImpl m_grabBlurPass;
 
-    public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
+    public override void AddRenderPasses(UnityEngine.Rendering.Universal.ScriptableRenderer renderer, ref UnityEngine.Rendering.Universal.RenderingData renderingData)
     {
         m_grabBlurPass.Setup(renderer.cameraColorTarget);
         renderer.EnqueuePass(m_grabBlurPass);
@@ -16,25 +16,25 @@ public class GrabBlurPass : ScriptableRendererFeature
 
     public override void Create()
     {
-        m_grabBlurPass = new GrabBlurPassImpl(RenderTargetHandle.CameraTarget);
-        m_grabBlurPass.renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
+        m_grabBlurPass = new GrabBlurPassImpl(UnityEngine.Rendering.Universal.RenderTargetHandle.CameraTarget);
+        m_grabBlurPass.renderPassEvent = UnityEngine.Rendering.Universal.RenderPassEvent.AfterRenderingOpaques;
     }
 }
 
 
-public class GrabBlurPassImpl : ScriptableRenderPass
+public class GrabBlurPassImpl : UnityEngine.Rendering.Universal.ScriptableRenderPass
 {
     const string k_RenderGrabPassTag = "BlurredGrabPass";
 
     public Shader m_BlurShader;
     public RenderTargetIdentifier m_ColorSource;
    
-    RenderTargetHandle m_BlurTemp1;
-    RenderTargetHandle m_BlurTemp2;
-    RenderTargetHandle m_ScreenCopyId;
+    UnityEngine.Rendering.Universal.RenderTargetHandle m_BlurTemp1;
+    UnityEngine.Rendering.Universal.RenderTargetHandle m_BlurTemp2;
+    UnityEngine.Rendering.Universal.RenderTargetHandle m_ScreenCopyId;
     CommandBufferBlur m_Blur;
 
-    public GrabBlurPassImpl(RenderTargetHandle colorHandle)
+    public GrabBlurPassImpl(UnityEngine.Rendering.Universal.RenderTargetHandle colorHandle)
     {
         m_Blur = new CommandBufferBlur();
         m_BlurTemp1.Init("_Temp1");
@@ -60,7 +60,7 @@ public class GrabBlurPassImpl : ScriptableRenderPass
         //ConfigureTarget(m_ColorHandle.Identifier());
     }
 
-    public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+    public override void Execute(ScriptableRenderContext context, ref UnityEngine.Rendering.Universal.RenderingData renderingData)
     {
         CommandBuffer cmd = CommandBufferPool.Get(k_RenderGrabPassTag);
 
